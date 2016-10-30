@@ -1,5 +1,5 @@
 package model;
-//janusz
+
 public class Rola {
 
 	private int id;
