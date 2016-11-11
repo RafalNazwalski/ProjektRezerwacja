@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutY="-1.0" prefHeight="259.0" prefWidth="463.0">
+      <TableView layoutY="-1.0" prefHeight="300.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="126.0" text="Data od" />
-          <TableColumn prefWidth="121.0" text="Data do" />
-            <TableColumn prefWidth="116.0" text="Numer pokoju" />
-            <TableColumn prefWidth="99.0" text="Cena" />
+          <TableColumn prefWidth="148.0" text="Data od" />
+          <TableColumn prefWidth="149.0" text="Data do" />
+            <TableColumn prefWidth="153.0" text="Numer pokoju" />
+            <TableColumn prefWidth="149.0" text="Cena" />
         </columns>
       </TableView>
    </children>

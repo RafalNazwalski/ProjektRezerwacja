@@ -6,8 +6,8 @@ import org.hibernate.cfg.NotYetImplementedException;
 
 import model.Rola;
 
-public class RolaRepository extends BaseRepository implements IGenericRepository<T extends classS>  {
-
+public class RolaRepository extends BaseRepository
+{
 	public void add(Rola rola){
 		
 	}

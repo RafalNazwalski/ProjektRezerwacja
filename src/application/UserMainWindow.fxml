@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <top>
+      <VBox prefHeight="85.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Plik">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Zamknij" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edycja" />
+                <Menu mnemonicParsing="false" text="Pomoc">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="O programie" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #336699;">
+               <children>
+                  <Button id="historyButton" fx:id="historyButton" mnemonicParsing="false" onAction="#showHistoryWindow" prefHeight="46.0" prefWidth="134.0" text="Historia pobytu" />
+                  <ChoiceBox id="filterChoiceBox" fx:id="filterChoiceBox" prefHeight="41.0" prefWidth="138.0" styleClass="application.css" />
+                  <Region prefHeight="41.0" prefWidth="461.0" />
+                  <Label alignment="CENTER" prefHeight="39.0" prefWidth="82.0" text="User" />
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="108.0" text="Wyloguj" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="621.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="DetailButton" fx:id="DetailButton" alignment="CENTER" mnemonicParsing="false" onAction="#showDetailsWindow" prefHeight="52.0" prefWidth="162.0" text="Szczegóły pokoju" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox id="CenterVBox" fx:id="CenterVBox" prefHeight="459.0" prefWidth="985.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="600.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="72.0" text="Ilość osób">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="20">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="98.0" prefWidth="75.0" />
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="72.0" text="Standard">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="ekonomiczny">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="98.0" prefWidth="79.0" />
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="91.0" text="Numer pokoju">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="7">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="98.0" prefWidth="91.0" />
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="44.0" text="Cena">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="400" />
+                        <ImageView fitHeight="98.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
