@@ -1,6 +1,4 @@
-/ModelView/
-/application/
 /database/
 /model/
 /repository/
-/controller/
+/application/

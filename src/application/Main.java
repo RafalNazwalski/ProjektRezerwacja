@@ -2,11 +2,10 @@ package application;
 	
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import repository.RolaRepository;
 
 
 public class Main extends Application 
@@ -24,6 +23,10 @@ public class Main extends Application
 			Scene scene = new Scene(layout);
 			mainWindow.setScene(scene);
 			mainWindow.show();
+			
+			RolaRepository rola = new RolaRepository();
+			
+			rola.getAll();
 			
 		} catch(Exception e) 
 		{

@@ -11,10 +11,10 @@ public class BaseRepository {
 	
 	
 	private SessionFactory sessionFactory = new Configuration()
-	        .configure("Database/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
+	        .configure("model/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
 	        .buildSessionFactory();
 	
-	private Session session;
+	protected Session session;
 	
 	protected void openConnection(){
 		session  = sessionFactory.openSession();

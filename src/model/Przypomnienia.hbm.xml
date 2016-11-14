@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-13 14:49:11 by Hibernate Tools 5.2.0.Beta1 -->
+<hibernate-mapping>
+    <class name="Przypomnienia" table="Przypomnienia" catalog="mydb" optimistic-lock="version">
+        <composite-id name="id" class="PrzypomnieniaId">
+            <key-property name="id" type="int">
+                <column name="Id" />
+            </key-property>
+            <key-property name="uzytkownikId" type="int">
+                <column name="Uzytkownik_Id" />
+            </key-property>
+            <key-property name="pokojId" type="int">
+                <column name="Pokoj_Id" />
+            </key-property>
+        </composite-id>
+        <property name="czyZobaczone" type="boolean">
+            <column name="CzyZobaczone" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
