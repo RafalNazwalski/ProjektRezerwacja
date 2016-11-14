@@ -2,7 +2,7 @@ package model;
 // Generated 2016-11-13 14:49:11 by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -16,10 +16,16 @@ public class Uzytkownik implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1970451232521873149L;
-	@ManyToOne
+
+	@Id
 	private UzytkownikId id;
 	private String login;
 	private String haslo;
+	
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Uzytkownik() {
 	}

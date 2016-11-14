@@ -1,5 +1,7 @@
 package repository;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,6 +17,8 @@ public class BaseRepository {
 	        .buildSessionFactory();
 	
 	protected Session session;
+	protected Query query;
+	protected String command;
 	
 	protected void openConnection(){
 		session  = sessionFactory.openSession();

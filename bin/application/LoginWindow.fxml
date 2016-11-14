@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginWindowController">
    <center>
       <GridPane alignment="TOP_RIGHT" prefHeight="286.0" prefWidth="505.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -27,6 +27,7 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="29.0" prefWidth="157.0" text="Login:" textAlignment="JUSTIFY">
@@ -45,16 +46,17 @@
                   <Insets left="80.0" />
                </GridPane.margin>
             </Label>
-            <TextField prefHeight="29.0" prefWidth="112.0" promptText="Nazwa użytkownika" GridPane.columnIndex="1">
+            <TextField id="TBLogin" fx:id="TBLogin" prefHeight="29.0" prefWidth="112.0" promptText="Nazwa użytkownika" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" right="80.0" />
                </GridPane.margin>
             </TextField>
-            <PasswordField prefHeight="29.0" prefWidth="112.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <PasswordField id="TBHaslo" fx:id="TBHaslo" prefHeight="29.0" prefWidth="112.0" promptText="Hasło" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" right="80.0" />
                </GridPane.margin>
             </PasswordField>
+            <Label fx:id="LblBlad" prefHeight="16.0" prefWidth="198.0" text="Niepoprawny login lub hasło!" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
@@ -68,7 +70,7 @@
    <bottom>
       <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="424.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="180.0" text="Zaloguj" textAlignment="CENTER">
+            <Button fx:id="BTNZaloguj" mnemonicParsing="false" onAction="#BTNZalogujClick" prefHeight="46.0" prefWidth="180.0" text="Zaloguj" textAlignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font></Button>

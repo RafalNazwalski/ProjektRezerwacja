@@ -12,10 +12,10 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping resource="Rola.hbm.xml" />
-        <mapping resource="Uzytkownik.hbm.xml"/>
-        <mapping resource="Pokoj.hbm.xml" />
-        <mapping resource="HistoriaRezerwacji.hbm.xml" />
-        <mapping resource="Przypomnienia.hbm.xml" />
+        <mapping class="model.Rola" />
+        <mapping class="model.Uzytkownik"/>
+        <mapping class="model.Pokoj" />
+        <mapping class="model.HistoriaRezerwacji" />
+        <mapping class="model.Przypomnienia" />
     </session-factory>
 </hibernate-configuration>

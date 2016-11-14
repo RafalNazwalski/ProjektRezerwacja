@@ -1,11 +1,12 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import repository.RolaRepository;
 
 
 public class Main extends Application 
@@ -17,21 +18,22 @@ public class Main extends Application
 	public void start(Stage primaryStage) {
 		try 
 		{
-			mainWindow = primaryStage;
-			
-			Parent layout = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-			Scene scene = new Scene(layout);
-			mainWindow.setScene(scene);
-			mainWindow.show();
-			
-			RolaRepository rola = new RolaRepository();
-			
-			rola.getAll();
+			showLoginWindow(primaryStage);
 			
 		} catch(Exception e) 
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private void showLoginWindow(Stage primaryStage) throws IOException{
+		
+		mainWindow = primaryStage;
+		
+		Parent layout = FXMLLoader.load(getClass().getResource("LoginWindow.fxml"));
+		Scene scene = new Scene(layout);
+		mainWindow.setScene(scene);
+		mainWindow.show();
 	}
 
 	public static void main(String[] args) 
