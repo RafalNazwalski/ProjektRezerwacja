@@ -1,12 +1,10 @@
 package repository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.cfg.NotYetImplementedException;
 
 import model.Rola;
-import model.Uzytkownik;
 
 public class RolaRepository extends BaseRepository
 {
@@ -18,15 +16,15 @@ public class RolaRepository extends BaseRepository
 		
 		openConnection();
 		
-		org.hibernate.Transaction t = session.beginTransaction();
+//		org.hibernate.Transaction t = session.beginTransaction();
 		
 //		Query query = session.createQuery("FROM Uzytkownik");
 //		
 //		List<Uzytkownik> list = query.list();
 //		To powoduje bledy
-		List<Uzytkownik> result = (List<Uzytkownik>) session.createQuery("from Uzytkownik").list();
+//		List<Uzytkownik> result = (List<Uzytkownik>) session.createQuery("from Uzytkownik").list();
 		
-		t.commit();
+//		t.commit();
 		closeConnection();
 		
 		return new ArrayList<Rola>();

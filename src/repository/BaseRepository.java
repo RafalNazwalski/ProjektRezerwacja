@@ -1,30 +1,41 @@
 package repository;
 
-import javax.persistence.Query;
+import java.util.Properties;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import model.Uzytkownik;
 
 public class BaseRepository {
 
-	protected Transaction tx;
+	private static final SessionFactory sessionFactory;
 	
 	
-	private SessionFactory sessionFactory = new Configuration()
-	        .configure("model/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
-	        .buildSessionFactory();
-	
-	protected Session session;
-	protected Query query;
-	protected String command;
-	
-	protected void openConnection(){
-		session  = sessionFactory.openSession();
+	static {
+		try {
+			Properties prop = new Properties();
+			prop.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/mydb");
+			prop.setProperty("hibernate.connection.username", "root");
+			prop.setProperty("hibernate.connection.password", "root");
+			prop.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+			
+			sessionFactory = new Configuration()
+				   .addProperties(prop)
+				   .addAnnotatedClass(Uzytkownik.class)
+				   .buildSessionFactory();
+		} catch (Throwable ex) {
+			throw new ExceptionInInitializerError(ex);
+		}
 	}
 	
-	protected void closeConnection(){
-		session.close();
+	public static Session openConnection() throws HibernateException{
+		return sessionFactory.openSession();
+	}
+	
+	public static void closeConnection(){
+		sessionFactory.close();
 	}
 }
