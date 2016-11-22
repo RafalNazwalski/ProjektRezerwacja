@@ -39,6 +39,8 @@ public class LoginWindowController implements Initializable {
 	
 	@FXML
 	public void BTNZalogujClick(ActionEvent event) throws IOException {
+		System.out.println("Jestem przed IFem");
+		
 		if(loginService.UserInDatabase(TBLogin.getText(), TBHaslo.getText())){
 			System.out.println("Udalo sie!");
 			
