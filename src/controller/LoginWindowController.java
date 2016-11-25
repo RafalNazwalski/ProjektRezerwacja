@@ -9,11 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import services.LoginService;
 
@@ -39,16 +39,17 @@ public class LoginWindowController implements Initializable {
 	
 	@FXML
 	public void BTNZalogujClick(ActionEvent event) throws IOException {
-		System.out.println("Jestem przed IFem");
 		
 		if(loginService.UserInDatabase(TBLogin.getText(), TBHaslo.getText())){
-			System.out.println("Udalo sie!");
-			
-			Parent mainWindow = FXMLLoader.load(getClass().getClassLoader().getResource("application/MainWindow.fxml"));
-			Scene mainWindowScene = new Scene(mainWindow);
+			FXMLLoader mainWindow = new FXMLLoader();
+			Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/MainWindow.fxml").openStream());
+			MainWindowController mainWindowController = (MainWindowController)mainWindow.getController();
+			mainWindowController.setUser(TBLogin.getText());
+			Scene mainWindowScene = new Scene(root);
 			Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
 			stage.setScene(mainWindowScene);
 			stage.show();
+			
 		}
 		else{
 			WyswietlBlad();
