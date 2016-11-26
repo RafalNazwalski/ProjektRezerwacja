@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import model.Pokoj;
 import model.Uzytkownik;
 
 public class BaseRepository {
@@ -25,6 +26,7 @@ public class BaseRepository {
 			sessionFactory = new Configuration()
 				   .addProperties(prop)
 				   .addAnnotatedClass(Uzytkownik.class)
+				   .addAnnotatedClass(Pokoj.class)
 				   .buildSessionFactory();
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);

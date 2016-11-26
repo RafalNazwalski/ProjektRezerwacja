@@ -41,15 +41,7 @@ public class LoginWindowController implements Initializable {
 	public void BTNZalogujClick(ActionEvent event) throws IOException {
 		
 		if(loginService.UserInDatabase(TBLogin.getText(), TBHaslo.getText())){
-			FXMLLoader mainWindow = new FXMLLoader();
-			Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/MainWindow.fxml").openStream());
-			MainWindowController mainWindowController = (MainWindowController)mainWindow.getController();
-			mainWindowController.setUser(TBLogin.getText());
-			Scene mainWindowScene = new Scene(root);
-			Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
-			stage.setScene(mainWindowScene);
-			stage.show();
-			
+			wyswietlGlowneOkno(event);
 		}
 		else{
 			WyswietlBlad();
@@ -65,6 +57,17 @@ public class LoginWindowController implements Initializable {
 		TBLogin.clear();
 		TBHaslo.clear();
 		LblBlad.setVisible(true);
+	}
+	
+	private void wyswietlGlowneOkno(ActionEvent event) throws IOException{
+		FXMLLoader mainWindow = new FXMLLoader();
+		Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/MainWindow.fxml").openStream());
+		MainWindowController mainWindowController = (MainWindowController)mainWindow.getController();
+		mainWindowController.setUser(TBLogin.getText());
+		Scene mainWindowScene = new Scene(root);
+		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(mainWindowScene);
+		stage.show();
 	}
 
 	

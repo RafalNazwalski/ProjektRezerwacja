@@ -6,31 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
    <top>
       <VBox prefHeight="85.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Plik">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Zamknij" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edycja" />
-                <Menu mnemonicParsing="false" text="Pomoc">
-                  <items>
-                  
-                    <MenuItem mnemonicParsing="false" text="O programie" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
             <HBox prefHeight="61.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #336699;">
                <children>
                   <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Historia pobytu" />
+                  <ListView fx:id="RoomList" prefHeight="200.0" prefWidth="200.0" />
                   <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Filtrowanie" />
-                  <Region prefHeight="43.0" prefWidth="126.0" />
+                  <Region prefHeight="45.0" prefWidth="126.0" />
                   <Label fx:id="LblUzytkownik" alignment="CENTER" prefHeight="39.0" prefWidth="82.0" text="User" />
                   <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="108.0" text="Wyloguj" />
                </children>
@@ -42,20 +27,19 @@
       </VBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="162.0" text="Szczegóły pokoju" />
-         </children>
-      </HBox>
+      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
-   <right>
-      <TableView editable="true" prefHeight="286.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="134.0" resizable="false" text="Ilość osób" />
-          <TableColumn minWidth="0.0" prefWidth="172.0" resizable="false" text="Standard" />
-            <TableColumn prefWidth="159.0" resizable="false" text="Numer pokoju" />
-            <TableColumn editable="false" minWidth="0.0" prefWidth="134.0" resizable="false" text="Cena" />
-        </columns>
-      </TableView>
-   </right>
+   <center>
+      <GridPane fx:id="MainPanel" prefHeight="442.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </center>
 </BorderPane>
