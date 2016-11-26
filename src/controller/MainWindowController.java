@@ -1,12 +1,18 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -21,6 +27,16 @@ public class MainWindowController implements Initializable {
 	@FXML
 	GridPane MainPanel;
 	
+	@FXML
+	ComboBox<String> DDCena;
+	
+	@FXML
+	ComboBox<String> DDIloscOsob;
+	
+	@FXML
+	ComboBox<String> DDStandard;
+	
+	
 	private MainWindowService mainWindowService = new MainWindowService();
 	
 	public void setUser(String user){
@@ -31,15 +47,61 @@ public class MainWindowController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		SetPropertiesForMainPanel();
 		
-		mainWindowService.displayAllUsers();
-		
+		displayRooms("wszystkie");
+		fillDropdowns();
+		//setActionEventToDropDowns();
+	}
+	
+	private void displayRooms(String cena){
 		int rowNumber = 0;
 		
-		for(Pokoj pokoj : mainWindowService.displayAllUsers())
+		ArrayList<Pokoj> pokoje = mainWindowService.displayRooms(cena);
+		
+		for(Pokoj pokoj : pokoje)
 		{
 			addRoomRectangle(pokoj, rowNumber);
 			rowNumber++;
 		}
+	}
+	
+	private void setActionEventToDropDowns(){
+		DDCena.valueProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				displayRooms(newValue);
+			}
+		});
+	}
+	
+	private void fillDropdowns(){
+		
+		ObservableList<String> cena = 
+			    FXCollections.observableArrayList(
+			        "Cena",
+			    	"ponizej 200zl",
+			        "pomiedzy 200zl a 400zl",
+			        "powyzej 400zl"
+			    );
+		DDCena.setItems(cena);
+		
+		ObservableList<String> iloscOsob = 
+			    FXCollections.observableArrayList(
+			        "Ilosc osob",
+			    	"2 osobowy",
+			        "pomiedzy 2 a 3",
+			        "4 i wiecej"
+			    );
+		DDIloscOsob.setItems(iloscOsob);
+		
+		ObservableList<String> standard = 
+			    FXCollections.observableArrayList(
+			        "Standard",
+			    	"Zwykly",
+			        "Podwyzszony",
+			        "Apartament"
+			    );
+		DDStandard.setItems(standard);
 	}
 	
 	private void addRoomRectangle(Pokoj pokoj, int rowNumber){
@@ -88,7 +150,7 @@ public class MainWindowController implements Initializable {
 		pane.add(detailsButton, 4, 0);
 		
 		MainPanel.add(pane, 0, rowNumber);
-		MainPanel.setMargin(pane, margin);
+		GridPane.setMargin(pane, margin);
 	}
 	
 	private void SetPropertiesForMainPanel()

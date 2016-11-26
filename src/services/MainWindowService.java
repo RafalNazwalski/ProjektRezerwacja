@@ -9,7 +9,7 @@ public class MainWindowService {
 
 	PokojRepository pokojRepository = new PokojRepository();
 	
-	public ArrayList<Pokoj> displayAllUsers(){
-		return pokojRepository.getAllRooms();
+	public ArrayList<Pokoj> displayRooms(String price){
+		return pokojRepository.getRooms(price);
 	}
 }

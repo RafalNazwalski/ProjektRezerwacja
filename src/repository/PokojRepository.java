@@ -10,10 +10,10 @@ import org.hibernate.Transaction;
 import model.Pokoj;
 
 public class PokojRepository extends BaseRepository {
+	ArrayList<Pokoj> list = new ArrayList<Pokoj>();
 
-	public ArrayList<Pokoj> getAllRooms(){
+	public ArrayList<Pokoj> getRooms(String price){
 		
-		ArrayList<Pokoj> list = new ArrayList<Pokoj>();
 		
 		Session session = openConnection();
 		Transaction t = session.beginTransaction();
@@ -23,28 +23,48 @@ public class PokojRepository extends BaseRepository {
 		Query query = session.createQuery(hql);
 		List<Pokoj> results = query.list();
 		
-		for(int i = 0; i < results.size(); i++){
+		for(int i = 0; i < results.size(); i++){			
+
+			switch(price)
+			{
+				case "ponizej 200zl":
+					
+					if(results.get(i).getCena() < 200)
+					{
+						addRoom(results.get(i));
+					}
+					
+					break;
+				case "wszystkie":
+					addRoom(results.get(i));
+					break;
+			}
 			
-			int id = results.get(i).getId();
-			int numerPokoju = results.get(i).getNumerPokoju();
-			int standard = results.get(i).getStandard();
-			int iloscOsob = results.get(i).getStandard();
-			float cena = results.get(i).getCena();
 			
-			Pokoj pokoj = new Pokoj();
-			
-			pokoj.setCena(cena);
-			pokoj.setIloscOsob(iloscOsob);
-			pokoj.setNumerPokoju(numerPokoju);
-			pokoj.setId(id);
-			pokoj.setStandard(standard);
-			
-			list.add(pokoj);
 		}
 
 		t.commit();
 		session.close();
 		
 		return list;
+	}
+	
+	private void addRoom(Pokoj pokoj)
+	{
+		Pokoj nowyPokoj = new Pokoj();
+		
+		int id = pokoj.getId();
+		int numerPokoju = pokoj.getNumerPokoju();
+		int standard = pokoj.getStandard();
+		int iloscOsob = pokoj.getStandard();
+		float cena = pokoj.getCena();
+		
+		nowyPokoj.setCena(cena);
+		nowyPokoj.setIloscOsob(iloscOsob);
+		nowyPokoj.setNumerPokoju(numerPokoju);
+		nowyPokoj.setId(id);
+		nowyPokoj.setStandard(standard);
+		
+		list.add(pokoj);
 	}
 }

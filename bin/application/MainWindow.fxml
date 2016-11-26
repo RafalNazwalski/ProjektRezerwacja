@@ -12,11 +12,12 @@
          <children>
             <HBox prefHeight="61.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #336699;">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Historia pobytu" />
-                  <ListView fx:id="RoomList" prefHeight="200.0" prefWidth="200.0" />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Filtrowanie" />
+                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Historia" />
+                  <ComboBox fx:id="DDCena" prefWidth="150.0" promptText="Cena" />
+                  <ComboBox fx:id="DDIloscOsob" prefWidth="150.0" promptText="Ilosc osob" />
+                  <ComboBox fx:id="DDStandard" prefWidth="150.0" promptText="Standard" />
+                  <Label fx:id="LblUzytkownik" alignment="CENTER" prefHeight="39.0" prefWidth="177.0" text="User" />
                   <Region prefHeight="45.0" prefWidth="126.0" />
-                  <Label fx:id="LblUzytkownik" alignment="CENTER" prefHeight="39.0" prefWidth="82.0" text="User" />
                   <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="108.0" text="Wyloguj" />
                </children>
                <padding>
