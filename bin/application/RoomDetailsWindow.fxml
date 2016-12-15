@@ -9,17 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <TableView prefHeight="300.0" prefWidth="409.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="86.0" text="Data Od" />
-          <TableColumn prefWidth="85.0" text="Data Do" />
-            <TableColumn prefWidth="100.0" text="Zarezerwowany" />
-            <TableColumn prefWidth="99.0" text="Ze zwierzętami" />
-            <TableColumn prefWidth="91.0" text="Dla palących" />
-        </columns>
-      </TableView>
-   </center>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -43,15 +32,29 @@
          </padding>
       </HBox>
    </bottom>
-   <right>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+   <left>
+      <VBox prefHeight="300.0" prefWidth="136.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="146.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" />
-            <Label prefHeight="53.0" prefWidth="51.0" text="Cena">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            <Label prefHeight="39.0" prefWidth="91.0" />
+            <Label prefHeight="39.0" prefWidth="91.0" text="Numer pokoju" />
+            <Label prefHeight="39.0" prefWidth="91.0" text="Liczba osób" />
+            <Label prefHeight="39.0" prefWidth="113.0" text="Czy dla palących" />
+            <Label prefHeight="39.0" prefWidth="126.0" text="Czy ze zwierzętami" />
+            <Label prefHeight="39.0" prefWidth="91.0" text="Jaki standard" />
+            <Label prefHeight="39.0" prefWidth="91.0" text="Cena" />
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="300.0" prefWidth="494.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="39.0" prefWidth="91.0" />
+            <Label id="numerPokojuLbl" prefHeight="39.0" prefWidth="91.0" />
+            <Label id="liczbaOsobLbl" prefHeight="39.0" prefWidth="91.0" />
+            <Label id="czyDlaPalacychLbl" prefHeight="39.0" prefWidth="91.0" />
+            <Label id="czyZeZwierzetamiLbl" prefHeight="39.0" prefWidth="91.0" />
+            <Label id="jakiStandard" prefHeight="39.0" prefWidth="91.0" />
+            <Label id="cena" prefHeight="39.0" prefWidth="91.0" />
          </children>
       </VBox>
    </right>

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -8,14 +9,22 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import model.FilterPrice;
 import model.Pokoj;
 import services.MainWindowService;
 
@@ -69,6 +78,7 @@ public class MainWindowController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				
 				displayRooms(newValue);
 			}
 		});
@@ -78,12 +88,12 @@ public class MainWindowController implements Initializable {
 		
 		ObservableList<String> cena = 
 			    FXCollections.observableArrayList(
-			        "Cena",
-			    	"ponizej 200zl",
-			        "pomiedzy 200zl a 400zl",
-			        "powyzej 400zl"
+			        "Ponizej 200",
+			        "Pomiedzy 200 a 400",
+			        "Powyzej 400"
 			    );
 		DDCena.setItems(cena);
+		
 		
 		ObservableList<String> iloscOsob = 
 			    FXCollections.observableArrayList(
@@ -142,6 +152,17 @@ public class MainWindowController implements Initializable {
 		
 		Button detailsButton = new Button();
 		detailsButton.setText("Szczegoly");
+		detailsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	try {
+					wyswietlOknoSzczegolow(event);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
 		
 		pane.add(lblNumerPokoju, 0, 0);
 		pane.add(lblIloscOsob, 1, 0);
@@ -151,6 +172,33 @@ public class MainWindowController implements Initializable {
 		
 		MainPanel.add(pane, 0, rowNumber);
 		GridPane.setMargin(pane, margin);
+	}
+	
+	@FXML protected void handleSubmitButtonAction(ActionEvent event) {
+        try {
+			detailsButtonClick(event);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	
+	@FXML
+	public void detailsButtonClick(ActionEvent event) throws IOException {
+		
+			wyswietlOknoSzczegolow(event);
+	}
+	
+	private void wyswietlOknoSzczegolow(ActionEvent event) throws IOException{
+		
+		FXMLLoader detailsWindow = new FXMLLoader();
+		Pane root = detailsWindow.load(getClass().getClassLoader().getResource("application/RoomDetailsWindow.fxml").openStream());
+		RoomDetailsWindowController roomDetailsWindowController = (RoomDetailsWindowController)detailsWindow.getController();
+		
+		Scene scene = new Scene(root);
+		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	private void SetPropertiesForMainPanel()
