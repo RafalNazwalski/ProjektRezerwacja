@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -13,13 +17,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
    <top>
       <VBox prefHeight="85.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="61.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #336699;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#wyswietlHistoryWindow" prefHeight="46.0" prefWidth="134.0" text="Historia" />
+                  <Button fx:id="historiaBTN" mnemonicParsing="false" onAction="#wyswietlHistoryWindow" prefHeight="46.0" prefWidth="134.0" text="Historia" />
                   <ComboBox fx:id="DDCena" prefWidth="150.0" promptText="Cena" />
                   <ComboBox fx:id="DDIloscOsob" prefWidth="150.0" promptText="Ilosc osob" />
                   <ComboBox fx:id="DDStandard" prefWidth="150.0" promptText="Standard" />

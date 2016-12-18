@@ -39,4 +39,8 @@ public class Main extends Application
 	{
 		launch(args);
 	}
+	
+	public Stage getMainWindow(){
+		return mainWindow;
+	}
 }

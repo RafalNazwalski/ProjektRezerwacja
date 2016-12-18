@@ -24,10 +24,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.FilterPrice;
 import model.Pokoj;
 import services.MainWindowService;
-import services.PrintService;
 
 public class MainWindowController implements Initializable {
 	
@@ -46,7 +44,8 @@ public class MainWindowController implements Initializable {
 	@FXML
 	ComboBox<String> DDStandard;
 	
-	PrintService printservice = new PrintService();
+	@FXML
+	Button historiaBTN;
 	
 	private MainWindowService mainWindowService = new MainWindowService();
 	
@@ -189,10 +188,11 @@ public class MainWindowController implements Initializable {
 		stage.show();
 	}
 	
+	@FXML
 	private void wyswietlHistoryWindow(ActionEvent event) throws IOException{
 		FXMLLoader wyswietlHistoryWindow = new FXMLLoader();
 		Pane root = wyswietlHistoryWindow.load(getClass().getClassLoader().getResource("application/HistoryClientWindow.fxml").openStream());
-		MainWindowController mainWindowController = (MainWindowController)wyswietlHistoryWindow.getController();
+		//HistoryWindowController historyWindowController = (HistoryWindowController)wyswietlHistoryWindow.getController();
 		Scene HistoryWindowScene = new Scene(root);
 		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(HistoryWindowScene);
