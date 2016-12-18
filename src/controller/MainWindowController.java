@@ -180,7 +180,7 @@ public class MainWindowController implements Initializable {
 		FXMLLoader detailsWindow = new FXMLLoader();
 		Pane root = detailsWindow.load(getClass().getClassLoader().getResource("application/RoomDetailsWindow.fxml").openStream());
 		RoomDetailsWindowController roomDetailsWindowController = (RoomDetailsWindowController)detailsWindow.getController();
-		
+		roomDetailsWindowController.setPokoj(pokoj);
 		Scene scene = new Scene(root);
 		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
