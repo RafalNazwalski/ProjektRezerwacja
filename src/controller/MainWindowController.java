@@ -156,7 +156,7 @@ public class MainWindowController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
             	try {
-					wyswietlOknoSzczegolow(event);
+					wyswietlOknoSzczegolow(event, pokoj);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -173,23 +173,9 @@ public class MainWindowController implements Initializable {
 		MainPanel.add(pane, 0, rowNumber);
 		GridPane.setMargin(pane, margin);
 	}
+
 	
-	@FXML protected void handleSubmitButtonAction(ActionEvent event) {
-        try {
-			detailsButtonClick(event);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-	
-	@FXML
-	public void detailsButtonClick(ActionEvent event) throws IOException {
-		
-			wyswietlOknoSzczegolow(event);
-	}
-	
-	private void wyswietlOknoSzczegolow(ActionEvent event) throws IOException{
+	private void wyswietlOknoSzczegolow(ActionEvent event, Pokoj pokoj) throws IOException{
 		
 		FXMLLoader detailsWindow = new FXMLLoader();
 		Pane root = detailsWindow.load(getClass().getClassLoader().getResource("application/RoomDetailsWindow.fxml").openStream());

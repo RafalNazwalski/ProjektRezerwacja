@@ -46,7 +46,7 @@
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="300.0" prefWidth="494.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="300.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="39.0" prefWidth="91.0" />
             <Label id="numerPokojuLbl" prefHeight="39.0" prefWidth="91.0" />
