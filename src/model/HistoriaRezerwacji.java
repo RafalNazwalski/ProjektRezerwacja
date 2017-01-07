@@ -3,10 +3,14 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +31,7 @@ public class HistoriaRezerwacji {
 	private int uzytkownik_Id;
 	
 	@Column(name = "Pokoj_Id")
-	private int pokoj_Id;
+	private Integer pokoj_Id;
 	
 	@Column(name = "CzyAnulowano")
 	private boolean czyAnulowano;
@@ -91,6 +95,4 @@ public class HistoriaRezerwacji {
 	public void setCzyAnulowano(boolean czyAnulowano) {
 		this.czyAnulowano = czyAnulowano;
 	}
-
-	
 }

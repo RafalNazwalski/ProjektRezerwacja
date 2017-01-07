@@ -76,7 +76,7 @@ public class RoomDetailsWindowController {
 		
 		if(dateFrom != null && dateTo != null)
 		{
-			service.ReserveRoom(userId, roomId, dateFrom, dateTo);
+			service.ReserveRoom(userId, pokoj.getNumerPokoju(), dateFrom, dateTo);
 		}
 	}
 }

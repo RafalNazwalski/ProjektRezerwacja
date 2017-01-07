@@ -188,7 +188,6 @@ public class MainWindowController implements Initializable {
 		roomDetailsWindowController.setPokoj(pokoj, userId);
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
-		//Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.showAndWait();
@@ -198,11 +197,13 @@ public class MainWindowController implements Initializable {
 	private void wyswietlHistoryWindow(ActionEvent event) throws IOException{
 		FXMLLoader wyswietlHistoryWindow = new FXMLLoader();
 		Pane root = wyswietlHistoryWindow.load(getClass().getClassLoader().getResource("application/HistoryClientWindow.fxml").openStream());
-		//HistoryWindowController historyWindowController = (HistoryWindowController)wyswietlHistoryWindow.getController();
+		HistoryWindowController historyWindowController = (HistoryWindowController)wyswietlHistoryWindow.getController();
+		historyWindowController.LoadHistory(this.userId);
 		Scene HistoryWindowScene = new Scene(root);
-		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(HistoryWindowScene);
-		stage.show();
+		stage.showAndWait();
 	}
 	
 	private void SetPropertiesForMainPanel()

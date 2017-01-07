@@ -24,13 +24,6 @@
       </HBox>
    </bottom>
    <center>
-      <TableView id="toPrint" fx:id="toPrint" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Data od" />
-          <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Data do" />
-            <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Numer pokoju" />
-            <TableColumn maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Cena" />
-        </columns>
-      </TableView>
+      <TableView id="toPrint" fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
