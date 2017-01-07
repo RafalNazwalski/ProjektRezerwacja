@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import model.HistoriaRezerwacji;
 import model.Pokoj;
 import model.Uzytkownik;
 
@@ -27,6 +28,7 @@ public class BaseRepository {
 				   .addProperties(prop)
 				   .addAnnotatedClass(Uzytkownik.class)
 				   .addAnnotatedClass(Pokoj.class)
+				   .addAnnotatedClass(HistoriaRezerwacji.class)
 				   .buildSessionFactory();
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);

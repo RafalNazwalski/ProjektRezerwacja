@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Uzytkownik;
 import services.LoginService;
 
 public class LoginWindowController implements Initializable {
@@ -40,8 +41,11 @@ public class LoginWindowController implements Initializable {
 	@FXML
 	public void BTNZalogujClick(ActionEvent event) throws IOException {
 		
-		if(loginService.UserInDatabase(TBLogin.getText(), TBHaslo.getText())){
-			wyswietlGlowneOkno(event);
+		Uzytkownik user = loginService.getUser(TBLogin.getText(), TBHaslo.getText());
+		
+		
+		if(user != null){
+			wyswietlGlowneOkno(event, user);
 		}
 		else{
 			WyswietlBlad();
@@ -59,11 +63,12 @@ public class LoginWindowController implements Initializable {
 		LblBlad.setVisible(true);
 	}
 	
-	private void wyswietlGlowneOkno(ActionEvent event) throws IOException{
+	private void wyswietlGlowneOkno(ActionEvent event, Uzytkownik user) throws IOException{
 		FXMLLoader mainWindow = new FXMLLoader();
 		Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/MainWindow.fxml").openStream());
 		MainWindowController mainWindowController = (MainWindowController)mainWindow.getController();
-		mainWindowController.setUser(TBLogin.getText());
+		
+		mainWindowController.setUser(user.getLogin(), user.getId());
 		Scene mainWindowScene = new Scene(root);
 		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(mainWindowScene);
