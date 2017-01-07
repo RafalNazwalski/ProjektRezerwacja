@@ -30,6 +30,8 @@ public class HistoriaRezerwacji {
 	@Column(name = "Uzytkownik_Id")
 	private int uzytkownik_Id;
 	
+	//zmienic int na Integer albo Long (nie typy primitywne!)
+	
 	@Column(name = "Pokoj_Id")
 	private Integer pokoj_Id;
 	

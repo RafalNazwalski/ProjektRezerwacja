@@ -41,12 +41,14 @@ public class HistoryRepository extends BaseRepository {
 			
 			for(HistoriaRezerwacji historia : results){			
 				list.add(historia);
-			}			
+			}		
+			// robimy niepotrzebnie 2 listy
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
 		}
+		
 		
 
 		t.commit();

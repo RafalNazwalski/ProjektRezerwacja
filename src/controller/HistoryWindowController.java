@@ -11,10 +11,12 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PageLayout;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,9 +36,6 @@ public class HistoryWindowController {
 	
 	@FXML
 	Button ButtonSave;
-	
-	@FXML
-	Button ButtonPDF;
 	
 	public void LoadHistory(int userId)
 	{
@@ -59,22 +58,28 @@ public class HistoryWindowController {
 		
 		if(success)
 		printJob.endJob();
+		
+		//dodac else do ifa zeby posprzatal
+		
+		//dodac kalendarz zamiast wpisywania dat i dodac komunikat, ze sie udalo
 	
 	}
 	private void CreateTable()
 	{
+		table.setPlaceholder(new Label("Nie posiadasz zadnej historii rezerwacji"));
+		
 		TableColumn column1 = new TableColumn("Data od");
-		column1.setMinWidth(200);
+		column1.setMinWidth(150);
 		column1.setCellValueFactory(new PropertyValueFactory<HistoriaRezerwacji, Date>("dataOd"));
 		table.getColumns().add(column1);
 		
 		TableColumn column2 = new TableColumn("Data do");
-		column2.setMinWidth(200);
+		column2.setMinWidth(150);
 		column2.setCellValueFactory(new PropertyValueFactory<HistoriaRezerwacji, Date>("dataDo"));
 		table.getColumns().add(column2);
 		
 		TableColumn column3 = new TableColumn("Numer pokoju");
-		column3.setMinWidth(200);
+		column3.setMinWidth(150);
 		column3.setCellValueFactory(new PropertyValueFactory<HistoriaRezerwacji, Integer>("pokoj_Id"));
 		table.getColumns().add(column3);
 	}

@@ -25,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.FilterPrice;
 import model.Pokoj;
 import services.MainWindowService;
 
@@ -39,7 +40,7 @@ public class MainWindowController implements Initializable {
 	GridPane MainPanel;
 	
 	@FXML
-	ComboBox<String> DDCena;
+	ComboBox<FilterPrice> DDCena;
 	
 	@FXML
 	ComboBox<String> DDIloscOsob;
@@ -60,13 +61,14 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		SetPropertiesForMainPanel();
-		
-		displayRooms("wszystkie");
+		displayRooms(FilterPrice.WSZYSTKIE);
 		fillDropdowns();
-		//setActionEventToDropDowns();
+		setActionEventToDropDowns();
 	}
 	
-	private void displayRooms(String cena){
+	private void displayRooms(FilterPrice cena){
+		ClearRooms();
+		
 		int rowNumber = 0;
 		
 		ArrayList<Pokoj> pokoje = mainWindowService.displayRooms(cena);
@@ -79,11 +81,10 @@ public class MainWindowController implements Initializable {
 	}
 	
 	private void setActionEventToDropDowns(){
-		DDCena.valueProperty().addListener(new ChangeListener<String>(){
+		DDCena.valueProperty().addListener(new ChangeListener<FilterPrice>(){
 
 			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				
+			public void changed(ObservableValue<? extends FilterPrice> observable, FilterPrice oldValue, FilterPrice newValue) {
 				displayRooms(newValue);
 			}
 		});
@@ -91,32 +92,31 @@ public class MainWindowController implements Initializable {
 	
 	private void fillDropdowns(){
 		
-		ObservableList<String> cena = 
+		ObservableList<FilterPrice> cena = 
 			    FXCollections.observableArrayList(
-			        "Ponizej 200",
-			        "Pomiedzy 200 a 400",
-			        "Powyzej 400"
+			    	FilterPrice.PONIZEJ200,
+			    	FilterPrice.OD200DO400,
+			    	FilterPrice.POWYZEJ400
 			    );
 		DDCena.setItems(cena);
 		
-		
-		ObservableList<String> iloscOsob = 
-			    FXCollections.observableArrayList(
-			        "Ilosc osob",
-			    	"2 osobowy",
-			        "pomiedzy 2 a 3",
-			        "4 i wiecej"
-			    );
-		DDIloscOsob.setItems(iloscOsob);
-		
-		ObservableList<String> standard = 
-			    FXCollections.observableArrayList(
-			        "Standard",
-			    	"Zwykly",
-			        "Podwyzszony",
-			        "Apartament"
-			    );
-		DDStandard.setItems(standard);
+//		ObservableList<String> iloscOsob = 
+//			    FXCollections.observableArrayList(
+//			        "Ilosc osob",
+//			    	"2 osobowy",
+//			        "pomiedzy 2 a 3",
+//			        "4 i wiecej"
+//			    );
+//		DDIloscOsob.setItems(iloscOsob);
+//		
+//		ObservableList<String> standard = 
+//			    FXCollections.observableArrayList(
+//			        "Standard",
+//			    	"Zwykly",
+//			        "Podwyzszony",
+//			        "Apartament"
+//			    );
+//		DDStandard.setItems(standard);
 	}
 	
 	private void addRoomRectangle(Pokoj pokoj, int rowNumber){
@@ -210,5 +210,20 @@ public class MainWindowController implements Initializable {
 	{
 		Insets insets = new Insets(10, 50, 0, 50);
 		MainPanel.setPadding(insets);
+	}
+	
+	private void ClearRooms()
+	{
+		MainPanel.getChildren().toArray();
+		
+		for(Object node : MainPanel.getChildren().toArray())
+		{
+			if(node.getClass() == GridPane.class)
+			{
+				//MainPanel.getChildren().remove(n);
+			}
+		}
+		
+		//nagrac filmik na koniec prezentacja max 5 min
 	}
 }

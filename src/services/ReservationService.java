@@ -34,5 +34,7 @@ public class ReservationService
 		{
 			System.out.println("nie udalo sie!\r\n" + ex.getMessage());
 		}
+		
+		//catch zbyt ogolny - powinien dotyczyc tylko parsowania i wyswietlic komunikat, ze nie dziala
 	}
 }

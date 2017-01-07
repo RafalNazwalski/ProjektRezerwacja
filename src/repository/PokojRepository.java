@@ -7,12 +7,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import model.FilterPrice;
 import model.Pokoj;
 
 public class PokojRepository extends BaseRepository {
 	ArrayList<Pokoj> list = new ArrayList<Pokoj>();
 
-	public ArrayList<Pokoj> getRooms(String price){
+	//wyrzucic liste z gory - w repozytorium i serwisach ma nie byc zadnych pol. Sa bezstanowe
+	
+	public ArrayList<Pokoj> getRooms(FilterPrice price){
 		
 		
 		Session session = openConnection();
@@ -25,17 +28,18 @@ public class PokojRepository extends BaseRepository {
 		
 		for(int i = 0; i < results.size(); i++){			
 
+			
+			//dokonczyc filtry
 			switch(price)
 			{
-				case "ponizej 200zl":
-					
+				case PONIZEJ200:
 					if(results.get(i).getCena() < 200)
 					{
 						addRoom(results.get(i));
 					}
 					
 					break;
-				case "wszystkie":
+				case WSZYSTKIE:
 					addRoom(results.get(i));
 					break;
 			}

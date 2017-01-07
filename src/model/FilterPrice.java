@@ -2,6 +2,7 @@ package model;
 
 public enum FilterPrice {
 	
+	WSZYSTKIE("Wszystkie"),
 	PONIZEJ200("Ponizej 200"),
 	OD200DO400("Pomiedzy 200 a 400"),
 	POWYZEJ400("Powyzej 400");
