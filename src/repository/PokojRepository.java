@@ -11,17 +11,11 @@ import model.FilterPrice;
 import model.Pokoj;
 
 public class PokojRepository extends BaseRepository {
-	ArrayList<Pokoj> list = new ArrayList<Pokoj>();
-
-	//wyrzucic liste z gory - w repozytorium i serwisach ma nie byc zadnych pol. Sa bezstanowe
 	
-	public ArrayList<Pokoj> getRooms(FilterPrice price){
-		
+	public List<Pokoj> getRooms(FilterPrice price){
 		
 		Session session = openConnection();
 		Transaction t = session.beginTransaction();
-		//Uzytkownik uzytkownik = (Uzytkownik)session.get(Uzytkownik.class, new String(user)); // tu gdzie integer dajemy numer id wiersza
-		
 		String hql = "FROM model.Pokoj";
 		Query query = session.createQuery(hql);
 		List<Pokoj> results = query.list();
@@ -50,11 +44,13 @@ public class PokojRepository extends BaseRepository {
 		t.commit();
 		session.close();
 		
-		return list;
+		return results;
 	}
 	
 	private void addRoom(Pokoj pokoj)
 	{
+		ArrayList<Pokoj> list = new ArrayList<Pokoj>();	
+		
 		Pokoj nowyPokoj = new Pokoj();
 		
 		int id = pokoj.getId();

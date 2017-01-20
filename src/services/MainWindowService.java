@@ -1,6 +1,6 @@
 package services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.FilterPrice;
 import model.Pokoj;
@@ -10,7 +10,7 @@ public class MainWindowService {
 
 	PokojRepository pokojRepository = new PokojRepository();
 	
-	public ArrayList<Pokoj> displayRooms(FilterPrice price){
+	public List<Pokoj> displayRooms(FilterPrice price){
 		return pokojRepository.getRooms(price);
 	}
 }

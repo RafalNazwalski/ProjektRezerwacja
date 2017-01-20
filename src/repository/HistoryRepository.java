@@ -1,6 +1,5 @@
 package repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -8,26 +7,28 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.HistoriaRezerwacji;
-import model.Pokoj;
 
 public class HistoryRepository extends BaseRepository {
 
-	public void reserveRoom(HistoriaRezerwacji rezerwacja){
+	public boolean reserveRoom(HistoriaRezerwacji rezerwacja){
 		
 		Session session = openConnection();
 		Transaction t = session.beginTransaction();
-		
-		session.save(rezerwacja);
-		
-		t.commit();
-		session.close();
-		
+		try{			
+			session.save(rezerwacja);
+			t.commit();
+			session.close();
+		}
+		catch(Exception ex){
+			System.out.println("nie udalo sie!\r\n" + ex.getMessage());
+			return false;
+		}
+		return true;	
 	}
 	
-	public ArrayList<HistoriaRezerwacji> getHistory(int userId){
+	public List<HistoriaRezerwacji> getHistory(int userId){
 		
-		
-		ArrayList<HistoriaRezerwacji> list = new ArrayList<HistoriaRezerwacji>();
+		List<HistoriaRezerwacji> results = null;
 		
 		Session session = openConnection();
 		Transaction t = session.beginTransaction();
@@ -36,24 +37,17 @@ public class HistoryRepository extends BaseRepository {
 		Query query = session.createQuery(hql);
 		query.setParameter("userId", userId);
 		try
-		{
-			List<HistoriaRezerwacji> results = query.list();
-			
-			for(HistoriaRezerwacji historia : results){			
-				list.add(historia);
-			}		
-			// robimy niepotrzebnie 2 listy
+		{			
+			results  = query.list();
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
 		}
-		
-		
 
 		t.commit();
 		session.close();
 		
-		return list;
+		return results;
 	}
 }

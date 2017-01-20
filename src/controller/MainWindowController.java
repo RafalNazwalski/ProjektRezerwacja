@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.FilterPrice;
 import model.Pokoj;
+import model.Uzytkownik;
 import services.MainWindowService;
 
 public class MainWindowController implements Initializable {
@@ -51,6 +52,9 @@ public class MainWindowController implements Initializable {
 	@FXML
 	Button historiaBTN;
 	
+	@FXML
+	Button wylogujBTN;
+	
 	private MainWindowService mainWindowService = new MainWindowService();
 	
 	public void setUser(String user, int id){
@@ -71,7 +75,7 @@ public class MainWindowController implements Initializable {
 		
 		int rowNumber = 0;
 		
-		ArrayList<Pokoj> pokoje = mainWindowService.displayRooms(cena);
+		List<Pokoj> pokoje = mainWindowService.displayRooms(cena);
 		
 		for(Pokoj pokoj : pokoje)
 		{
@@ -163,7 +167,6 @@ public class MainWindowController implements Initializable {
             	try {
 					wyswietlOknoSzczegolow(event, pokoj);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -204,6 +207,18 @@ public class MainWindowController implements Initializable {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(HistoryWindowScene);
 		stage.showAndWait();
+	}
+	
+	@FXML
+	private void wyswietlOknoLogowania(ActionEvent event) throws IOException{
+		FXMLLoader mainWindow = new FXMLLoader();
+		Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/LoginWindow.fxml").openStream());
+		LoginWindowController loginWindowController = (LoginWindowController)mainWindow.getController();
+		
+		Scene loginWindowScene = new Scene(root);
+		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(loginWindowScene);
+		stage.show();
 	}
 	
 	private void SetPropertiesForMainPanel()

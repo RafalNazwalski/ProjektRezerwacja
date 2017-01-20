@@ -2,12 +2,15 @@ package controller;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import model.Pokoj;
-import repository.HistoryRepository;
 import services.ReservationService;
 
 public class RoomDetailsWindowController {
@@ -16,6 +19,12 @@ public class RoomDetailsWindowController {
 	
 	int roomId;
 	int userId;
+	
+	@FXML
+	DatePicker DatePickerDataOd;
+	
+	@FXML
+	DatePicker DatePickerDataDo;
 	
 	@FXML
 	Button ButtonRezerwacja;
@@ -37,12 +46,6 @@ public class RoomDetailsWindowController {
 	
 	@FXML
 	Label cena;
-	
-	@FXML
-	TextField TextBoxDataOd;
-	
-	@FXML
-	TextField TextBoxDataDo;
 	
 	@FXML
 	Button anulujBTN;
@@ -70,13 +73,21 @@ public class RoomDetailsWindowController {
 	
 	@FXML
 	public void reserveRoom()
-	{
-		String dateFrom = TextBoxDataDo.getText();
-		String dateTo = TextBoxDataOd.getText();
-		
-		if(dateFrom != null && dateTo != null)
+	{	
+		if(DatePickerDataOd.getValue().toString() != null
+				&& DatePickerDataDo.getValue().toString() != null)
 		{
-			service.ReserveRoom(userId, pokoj.getNumerPokoju(), dateFrom, dateTo);
+			if(service.ReserveRoom(userId, pokoj.getNumerPokoju(), DatePickerDataOd.getValue().toString(), DatePickerDataDo.getValue().toString()) == true){
+				Alert alert = new Alert(AlertType.CONFIRMATION, "Rezerwacja się powiodła!", ButtonType.OK);
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+				alert.show();
+			}
+			else{
+				Alert alert = new Alert(AlertType.ERROR, "Rezerwacja nieudana!", ButtonType.OK);
+				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+				alert.show();
+			}
+			
 		}
 	}
 }

@@ -15,16 +15,6 @@ public class RolaRepository extends BaseRepository
 	public ArrayList<Rola> getAll(){
 		
 		openConnection();
-		
-//		org.hibernate.Transaction t = session.beginTransaction();
-		
-//		Query query = session.createQuery("FROM Uzytkownik");
-//		
-//		List<Uzytkownik> list = query.list();
-//		To powoduje bledy
-//		List<Uzytkownik> result = (List<Uzytkownik>) session.createQuery("from Uzytkownik").list();
-		
-//		t.commit();
 		closeConnection();
 		
 		return new ArrayList<Rola>();

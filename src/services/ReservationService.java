@@ -11,7 +11,7 @@ public class ReservationService
 {
 	HistoryRepository repository = new HistoryRepository();
 	
-	public void ReserveRoom(int userId, int roomId, String dateFrom, String dateTo)
+	public boolean ReserveRoom(int userId, int roomId, String dateFrom, String dateTo)
 	{
 		Date dataOd;
 		Date dataDo;
@@ -23,18 +23,18 @@ public class ReservationService
 		{
 			dataOd = format.parse(dateFrom);
 			dataDo = format.parse(dateTo);
-			rezerwacja.setPokoj_Id(roomId);
-			rezerwacja.setUzytkownik_Id(userId);
-			rezerwacja.setCzyAnulowano(false);
-			rezerwacja.setDataDo(dataDo);
-			rezerwacja.setDataOd(dataOd);
-			repository.reserveRoom(rezerwacja);
 		}
 		catch(Exception ex)
 		{
 			System.out.println("nie udalo sie!\r\n" + ex.getMessage());
+			return false;
 		}
 		
-		//catch zbyt ogolny - powinien dotyczyc tylko parsowania i wyswietlic komunikat, ze nie dziala
+		rezerwacja.setPokoj_Id(roomId);
+		rezerwacja.setUzytkownik_Id(userId);
+		rezerwacja.setCzyAnulowano(false);
+		rezerwacja.setDataDo(dataDo);
+		rezerwacja.setDataOd(dataOd);
+		return repository.reserveRoom(rezerwacja);
 	}
 }
