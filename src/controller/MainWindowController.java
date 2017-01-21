@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.fasterxml.classmate.Filter;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,7 +27,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.FilterPeople;
 import model.FilterPrice;
+import model.FilterStandard;
 import model.Pokoj;
 import model.Uzytkownik;
 import services.MainWindowService;
@@ -44,10 +48,10 @@ public class MainWindowController implements Initializable {
 	ComboBox<FilterPrice> DDCena;
 	
 	@FXML
-	ComboBox<String> DDIloscOsob;
+	ComboBox<FilterPeople> DDIloscOsob;
 	
 	@FXML
-	ComboBox<String> DDStandard;
+	ComboBox<FilterStandard> DDStandard;
 	
 	@FXML
 	Button historiaBTN;
@@ -65,17 +69,17 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		SetPropertiesForMainPanel();
-		displayRooms(FilterPrice.WSZYSTKIE);
+		displayRooms(FilterPrice.WSZYSTKIE, FilterPeople.DOWOLNA, FilterStandard.WSZYSTKIE);
 		fillDropdowns();
 		setActionEventToDropDowns();
 	}
 	
-	private void displayRooms(FilterPrice cena){
+	private void displayRooms(FilterPrice cena, FilterPeople people, FilterStandard standard){
 		ClearRooms();
 		
 		int rowNumber = 0;
 		
-		List<Pokoj> pokoje = mainWindowService.displayRooms(cena);
+		List<Pokoj> pokoje = mainWindowService.displayRooms(cena, people, standard);
 		
 		for(Pokoj pokoj : pokoje)
 		{
@@ -85,42 +89,73 @@ public class MainWindowController implements Initializable {
 	}
 	
 	private void setActionEventToDropDowns(){
+		
+		DDCena.setValue(FilterPrice.WSZYSTKIE);
+		DDIloscOsob.setValue(FilterPeople.DOWOLNA);
+		DDStandard.setValue(FilterStandard.WSZYSTKIE);
+		
 		DDCena.valueProperty().addListener(new ChangeListener<FilterPrice>(){
 
 			@Override
 			public void changed(ObservableValue<? extends FilterPrice> observable, FilterPrice oldValue, FilterPrice newValue) {
-				displayRooms(newValue);
+				filter();
 			}
 		});
+
+		DDIloscOsob.valueProperty().addListener(new ChangeListener<FilterPeople>(){
+
+			@Override
+			public void changed(ObservableValue<? extends FilterPeople> observable, FilterPeople oldValue, FilterPeople newValue) {
+				filter();
+			}
+		});
+
+		
+		DDStandard.valueProperty().addListener(new ChangeListener<FilterStandard>(){
+
+			@Override
+			public void changed(ObservableValue<? extends FilterStandard> observable, FilterStandard oldValue, FilterStandard newValue) {
+				filter();
+			}
+		});		
+	}
+	
+	private void filter(){
+		FilterPrice price = DDCena.getValue();
+		FilterPeople people = DDIloscOsob.getValue();
+		FilterStandard standard = DDStandard.getValue();
+		System.out.println("Wyswietlam cene, liczbe osob oraz pokoje: " + DDCena.getValue() + ", " + DDIloscOsob.getValue() + ", " + DDStandard.getValue());
+		displayRooms(price, people, standard);
 	}
 	
 	private void fillDropdowns(){
 		
 		ObservableList<FilterPrice> cena = 
 			    FXCollections.observableArrayList(
+		    		FilterPrice.WSZYSTKIE,
 			    	FilterPrice.PONIZEJ200,
 			    	FilterPrice.OD200DO400,
 			    	FilterPrice.POWYZEJ400
 			    );
 		DDCena.setItems(cena);
 		
-//		ObservableList<String> iloscOsob = 
-//			    FXCollections.observableArrayList(
-//			        "Ilosc osob",
-//			    	"2 osobowy",
-//			        "pomiedzy 2 a 3",
-//			        "4 i wiecej"
-//			    );
-//		DDIloscOsob.setItems(iloscOsob);
-//		
-//		ObservableList<String> standard = 
-//			    FXCollections.observableArrayList(
-//			        "Standard",
-//			    	"Zwykly",
-//			        "Podwyzszony",
-//			        "Apartament"
-//			    );
-//		DDStandard.setItems(standard);
+		ObservableList<FilterPeople> liczbaOsob = 
+			    FXCollections.observableArrayList(
+			    	FilterPeople.DOWOLNA,
+		    		FilterPeople.JEDNOOSOBOWY,
+			    	FilterPeople.DWULUBTRZYOS,
+			    	FilterPeople.POWYZEJ3OS
+			    );
+		DDIloscOsob.setItems(liczbaOsob);
+
+		ObservableList<FilterStandard> standard =
+				FXCollections.observableArrayList(
+						FilterStandard.WSZYSTKIE,
+						FilterStandard.ZWYKLY,
+						FilterStandard.PODWYZSZONY,
+						FilterStandard.APARTAMENT
+				);
+		DDStandard.setItems(standard);
 	}
 	
 	private void addRoomRectangle(Pokoj pokoj, int rowNumber){
@@ -235,7 +270,8 @@ public class MainWindowController implements Initializable {
 		{
 			if(node.getClass() == GridPane.class)
 			{
-				//MainPanel.getChildren().remove(n);
+				GridPane pane = (GridPane)node;
+				pane.setVisible(false);
 			}
 		}
 		
