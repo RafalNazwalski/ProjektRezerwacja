@@ -31,12 +31,10 @@ public class LoginWindowController implements Initializable {
 	
 	LoginService loginService = new LoginService();
 	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		LblBlad.setVisible(false);
-	}
-	
+	}	
 	
 	@FXML
 	public void BTNZalogujClick(ActionEvent event) throws IOException {

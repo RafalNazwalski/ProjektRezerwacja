@@ -3,7 +3,7 @@ package model;
 public enum FilterStandard {
 
 	WSZYSTKIE("Wszystkie"),
-	ZWYKLY("Zwykly"),
+	ZWYKLY("Zwykły"),
 	PODWYZSZONY("Podwyzszony"),
 	APARTAMENT("Apartament");
 	

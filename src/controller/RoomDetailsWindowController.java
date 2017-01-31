@@ -56,13 +56,12 @@ public class RoomDetailsWindowController {
 		this.pokoj = pokoj;
 		this.userId = userId;
 		this.roomId = pokoj.getId();
-		System.out.println(this.userId);
 		numerPokojuLbl.setText(String.valueOf(pokoj.getNumerPokoju()));
 		liczbaOsobLbl.setText(String.valueOf(pokoj.getIloscOsob()));
-		czyDlaPalacychLbl.setText(String.valueOf(pokoj.isCzyPalacy()));
-		czyZeZwierzetamiLbl.setText(String.valueOf(pokoj.isCzyZwierzeta()));
-		jakiStandard.setText(String.valueOf(pokoj.getStandard()));
-		cena.setText(String.valueOf(pokoj.getCena()));
+		czyDlaPalacychLbl.setText(String.valueOf(pokoj.isCzyPalacy() == true ? "Tak" : "Nie"));
+		czyZeZwierzetamiLbl.setText(String.valueOf(pokoj.isCzyZwierzeta() == true ? "Tak" : "Nie"));
+		jakiStandard.setText(String.valueOf(pokoj.getStandard() == 1 ?  "Zwykły" : pokoj.getStandard() == 2 ? "Podwyższony" : "Apartament"));
+		cena.setText(String.valueOf(pokoj.getCena()) + ",-");
 	}
 	
 	@FXML

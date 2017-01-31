@@ -29,8 +29,7 @@ public class HistoryWindowController {
 	
 	public void LoadHistory(int userId)
 	{
-		CreateTable();
-		
+		CreateTable();		
 		table.setItems(service.HistoryList(userId));
 	}
 	

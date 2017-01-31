@@ -1,6 +1,7 @@
 package services;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,16 +17,13 @@ public class ReservationService
 		Date dataOd;
 		Date dataDo;
 		HistoriaRezerwacji rezerwacja = new HistoriaRezerwacji();
-		
-		
+			
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		try
-		{
+		try{
 			dataOd = format.parse(dateFrom);
 			dataDo = format.parse(dateTo);
 		}
-		catch(Exception ex)
-		{
+		catch(ParseException ex){
 			System.out.println("nie udalo sie!\r\n" + ex.getMessage());
 			return false;
 		}

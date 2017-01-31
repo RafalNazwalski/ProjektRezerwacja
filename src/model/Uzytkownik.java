@@ -12,7 +12,7 @@ public class Uzytkownik{
 
 	@Id 
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@Column(name = "Login")
 	private String login;
@@ -31,7 +31,7 @@ public class Uzytkownik{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

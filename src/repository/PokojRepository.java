@@ -1,6 +1,5 @@
 package repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,7 +12,7 @@ import model.FilterStandard;
 import model.Pokoj;
 
 public class PokojRepository extends BaseRepository {
-
+	
 	public List<Pokoj> getRooms(FilterPrice price, FilterPeople people, FilterStandard standard) {
 
 		Session session = openConnection();
@@ -62,31 +61,11 @@ public class PokojRepository extends BaseRepository {
 			break;
 		default:
 			break;
-	}
+		}
 		
 		t.commit();
 		session.close();
 
 		return results;
-	}
-
-	private void addRoom(Pokoj pokoj) {
-		ArrayList<Pokoj> list = new ArrayList<Pokoj>();
-
-		Pokoj nowyPokoj = new Pokoj();
-
-		int id = pokoj.getId();
-		int numerPokoju = pokoj.getNumerPokoju();
-		int standard = pokoj.getStandard();
-		int iloscOsob = pokoj.getStandard();
-		float cena = pokoj.getCena();
-
-		nowyPokoj.setCena(cena);
-		nowyPokoj.setIloscOsob(iloscOsob);
-		nowyPokoj.setNumerPokoju(numerPokoju);
-		nowyPokoj.setId(id);
-		nowyPokoj.setStandard(standard);
-
-		list.add(pokoj);
-	}
+	}	
 }

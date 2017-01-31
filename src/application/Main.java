@@ -24,7 +24,7 @@ public class Main extends Application
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void showLoginWindow(Stage primaryStage) throws IOException{
 		
 		mainWindow = primaryStage;

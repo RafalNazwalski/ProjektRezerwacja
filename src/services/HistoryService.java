@@ -13,8 +13,6 @@ public class HistoryService {
 	{
 		ObservableList<HistoriaRezerwacji> list = FXCollections.observableArrayList(repository.getHistory(userId));
 		
-		System.out.println(list.size());
-		
 		return list;
 	}
 }

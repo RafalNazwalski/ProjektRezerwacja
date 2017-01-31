@@ -1,16 +1,11 @@
 package model;
-// Generated 2016-11-13 14:49:11 by Hibernate Tools 5.2.0.Beta1
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +14,7 @@ public class HistoriaRezerwacji {
 
 	@Id
 	@GeneratedValue
-	private int Id;
+	private Integer Id;
 	
 	@Column(name = "DataOd")
 	private Date dataOd;
@@ -28,9 +23,7 @@ public class HistoriaRezerwacji {
 	private Date dataDo;
 
 	@Column(name = "Uzytkownik_Id")
-	private int uzytkownik_Id;
-	
-	//zmienic int na Integer albo Long (nie typy primitywne!)
+	private Integer uzytkownik_Id;
 	
 	@Column(name = "Pokoj_Id")
 	private Integer pokoj_Id;
@@ -41,7 +34,7 @@ public class HistoriaRezerwacji {
 	public HistoriaRezerwacji() {
 	}
 
-	public HistoriaRezerwacji (int Id , Date dataOd, Date dataDo, int uzytkownik_Id, int pokoj_Id, boolean czyAnulowano) {
+	public HistoriaRezerwacji (Integer Id , Date dataOd, Date dataDo, Integer uzytkownik_Id, Integer pokoj_Id, boolean czyAnulowano) {
 		this.Id = Id;
 		this.dataOd = dataOd;
 		this.dataDo = dataDo;
@@ -54,7 +47,7 @@ public class HistoriaRezerwacji {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 
@@ -78,7 +71,7 @@ public class HistoriaRezerwacji {
 		return uzytkownik_Id;
 	}
 
-	public void setUzytkownik_Id(int uzytkownik_Id) {
+	public void setUzytkownik_Id(Integer uzytkownik_Id) {
 		this.uzytkownik_Id = uzytkownik_Id;
 	}
 
@@ -86,7 +79,7 @@ public class HistoriaRezerwacji {
 		return pokoj_Id;
 	}
 
-	public void setPokoj_Id(int pokoj_Id) {
+	public void setPokoj_Id(Integer pokoj_Id) {
 		this.pokoj_Id = pokoj_Id;
 	}
 

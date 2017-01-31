@@ -2,10 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import com.fasterxml.classmate.Filter;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,7 +20,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -31,7 +33,6 @@ import model.FilterPeople;
 import model.FilterPrice;
 import model.FilterStandard;
 import model.Pokoj;
-import model.Uzytkownik;
 import services.MainWindowService;
 
 public class MainWindowController implements Initializable {
@@ -59,6 +60,15 @@ public class MainWindowController implements Initializable {
 	@FXML
 	Button wylogujBTN;
 	
+	@FXML
+	CheckBox CheckBoxTylkoWolne;
+	
+	@FXML
+	DatePicker DatePickerWolneOd;
+	
+	@FXML
+	DatePicker DatePickerWolneDo;
+	
 	private MainWindowService mainWindowService = new MainWindowService();
 	
 	public void setUser(String user, int id){
@@ -69,17 +79,29 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		SetPropertiesForMainPanel();
-		displayRooms(FilterPrice.WSZYSTKIE, FilterPeople.DOWOLNA, FilterStandard.WSZYSTKIE);
+		displayRooms(FilterPrice.WSZYSTKIE, FilterPeople.DOWOLNA, FilterStandard.WSZYSTKIE, false);
 		fillDropdowns();
 		setActionEventToDropDowns();
 	}
 	
-	private void displayRooms(FilterPrice cena, FilterPeople people, FilterStandard standard){
+	private void displayRooms(FilterPrice cena, FilterPeople people, FilterStandard standard, boolean tylkoWolne){
 		ClearRooms();
 		
 		int rowNumber = 0;
 		
-		List<Pokoj> pokoje = mainWindowService.displayRooms(cena, people, standard);
+		Date dataWolneOd = null;
+		Date dataWolneDo = null;
+		
+		if(tylkoWolne == true && DatePickerWolneOd.getValue() != null && DatePickerWolneDo.getValue() != null)
+		{
+			dataWolneOd = new Date(DatePickerWolneOd.getValue().getYear(), DatePickerWolneOd.getValue().getMonthValue(), DatePickerWolneOd.getValue().getDayOfMonth() );
+			dataWolneDo = new Date(DatePickerWolneDo.getValue().getYear(), DatePickerWolneDo.getValue().getMonthValue(), DatePickerWolneDo.getValue().getDayOfMonth());
+						
+			System.out.println(dataWolneOd);
+			System.out.println(dataWolneDo);
+		}
+		
+		List<Pokoj> pokoje = mainWindowService.displayRooms(cena, people, standard, tylkoWolne, dataWolneOd, dataWolneDo);
 		
 		for(Pokoj pokoj : pokoje)
 		{
@@ -117,15 +139,15 @@ public class MainWindowController implements Initializable {
 			public void changed(ObservableValue<? extends FilterStandard> observable, FilterStandard oldValue, FilterStandard newValue) {
 				filter();
 			}
-		});		
+		});
 	}
 	
+	@FXML
 	private void filter(){
 		FilterPrice price = DDCena.getValue();
 		FilterPeople people = DDIloscOsob.getValue();
 		FilterStandard standard = DDStandard.getValue();
-		System.out.println("Wyswietlam cene, liczbe osob oraz pokoje: " + DDCena.getValue() + ", " + DDIloscOsob.getValue() + ", " + DDStandard.getValue());
-		displayRooms(price, people, standard);
+		displayRooms(price, people, standard, CheckBoxTylkoWolne.isSelected());
 	}
 	
 	private void fillDropdowns(){
@@ -176,14 +198,14 @@ public class MainWindowController implements Initializable {
 		pane.setStyle("-fx-background-color:lightblue;");
 		
 		String numerPokoju = "Numer pokoju: " +  String.valueOf(pokoj.getNumerPokoju());
-		String iloscOsob = "Ilosc osob: " + String.valueOf(pokoj.getIloscOsob());
-		String komfort = "Komfort: " + String.valueOf(pokoj.getStandard());
+		String iloscOsob = "Ilość osób: " + String.valueOf(pokoj.getIloscOsob());
+		String komfort = "Komfort: ";
+		komfort += pokoj.getStandard() == 1 ?  "Zwykły" : pokoj.getStandard() == 2 ? "Podwyższony" : "Apartament" ;
 		String cena = "Cena: " + String.valueOf(pokoj.getCena()) + ",-";
 		
 		Label lblNumerPokoju = new Label();
 		lblNumerPokoju.setText(numerPokoju);
 		lblNumerPokoju.setStyle("-fx-font-family: Arial;");
-		//lblNumerPokoju.setStyle("-fx-font-size:20px; color:green; -fx-font-family:Arial;");
 		
 		Label lblIloscOsob = new Label();
 		lblIloscOsob.setText(iloscOsob);
@@ -248,7 +270,6 @@ public class MainWindowController implements Initializable {
 	private void wyswietlOknoLogowania(ActionEvent event) throws IOException{
 		FXMLLoader mainWindow = new FXMLLoader();
 		Pane root = mainWindow.load(getClass().getClassLoader().getResource("application/LoginWindow.fxml").openStream());
-		LoginWindowController loginWindowController = (LoginWindowController)mainWindow.getController();
 		
 		Scene loginWindowScene = new Scene(root);
 		Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -256,25 +277,20 @@ public class MainWindowController implements Initializable {
 		stage.show();
 	}
 	
-	private void SetPropertiesForMainPanel()
-	{
+	private void SetPropertiesForMainPanel(){
 		Insets insets = new Insets(10, 50, 0, 50);
 		MainPanel.setPadding(insets);
 	}
 	
-	private void ClearRooms()
-	{
+	private void ClearRooms(){
 		MainPanel.getChildren().toArray();
 		
-		for(Object node : MainPanel.getChildren().toArray())
-		{
-			if(node.getClass() == GridPane.class)
-			{
+		for(Object node : MainPanel.getChildren().toArray()){
+			if(node.getClass() == GridPane.class){
 				GridPane pane = (GridPane)node;
 				pane.setVisible(false);
 			}
 		}
-		
 		//nagrac filmik na koniec prezentacja max 5 min
 	}
 }

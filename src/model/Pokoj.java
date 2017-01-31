@@ -1,5 +1,4 @@
 package model;
-// Generated 2016-11-13 14:49:11 by Hibernate Tools 5.2.0.Beta1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ public class Pokoj {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@Column(name = "NumerPokoju")
 	private int numerPokoju;

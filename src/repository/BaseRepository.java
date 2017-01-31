@@ -15,7 +15,6 @@ public class BaseRepository {
 
 	private static final SessionFactory sessionFactory;
 	
-	
 	static {
 		try {
 			Properties prop = new Properties();
