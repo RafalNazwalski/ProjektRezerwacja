@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,12 +12,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import model.HistoriaRezerwacji;
 import model.Pokoj;
+import model.ReserveResult;
+import repository.HistoryRepository;
 import services.ReservationService;
 
 public class RoomDetailsWindowController {
 
 	ReservationService service = new ReservationService();
+	
 	
 	int roomId;
 	int userId;
@@ -76,17 +82,18 @@ public class RoomDetailsWindowController {
 		if(DatePickerDataOd.getValue().toString() != null
 				&& DatePickerDataDo.getValue().toString() != null)
 		{
-			if(service.ReserveRoom(userId, pokoj.getNumerPokoju(), DatePickerDataOd.getValue().toString(), DatePickerDataDo.getValue().toString()) == true){
-				Alert alert = new Alert(AlertType.CONFIRMATION, "Rezerwacja się powiodła!", ButtonType.OK);
-				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-				alert.show();
-			}
-			else{
-				Alert alert = new Alert(AlertType.ERROR, "Rezerwacja nieudana!", ButtonType.OK);
-				alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-				alert.show();
+			ReserveResult result = service.ReserveRoom(userId, pokoj.getNumerPokoju(), DatePickerDataOd.getValue().toString(), DatePickerDataDo.getValue().toString());
+
+			Alert alert = new Alert(AlertType.ERROR, null, ButtonType.OK);
+			alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+			alert.setContentText(result.toString());
+			
+			if(result ==  ReserveResult.OK)
+			{
+				alert.setAlertType(AlertType.CONFIRMATION);
 			}
 			
-		}
+			alert.show();
+	}
 	}
 }

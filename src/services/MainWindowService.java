@@ -25,9 +25,7 @@ public class MainWindowService {
 			
 			for(HistoriaRezerwacji historia : listaZajetychPokoi)
 			{
-				//System.out.println("Wyswietlam liste zajetych: " + historia.getPokoj_Id());
 				listaPokoi.removeIf(x -> x.getNumerPokoju() == historia.getPokoj_Id());
-				//System.out.println("Wyswietlam id: " +  + " oraz pokoj_Id: " + historia.getPokoj_Id());
 			}
 		}
 		
